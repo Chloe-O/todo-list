@@ -1,3 +1,37 @@
+$black: #171515;
+$beige: #6f5b3e;
+$cream: #f9f6f0;
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 20px;
+}
+
+body {
+  height: 100%;
+  background: $cream;
+  color: $black;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.to-do-list-container {
+  box-shadow: 1px 1px 10px #000;
+  margin: 50px auto;
+  border-radius: 15px;
+  padding: 1em;
+  max-width: 990px;
+
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+  }
+}
 
 /*# sourceMappingURL=style.scss.map */
