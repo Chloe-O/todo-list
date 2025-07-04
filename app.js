@@ -17,8 +17,6 @@ function renderListItems(x) {
   NewItemHTML.classList = "list-item";
   NewItemHTML.innerText = x;
   list.appendChild(NewItemHTML);
-  console.log(NewItemHTML);
-  console.log(listArr);
 }
 
 submitListItemBtn.addEventListener("click", (e) => {
@@ -32,12 +30,22 @@ submitListItemBtn.addEventListener("click", (e) => {
   }
 });
 
-// user wants to clear all tasks
+// user wants to clear all list items
 function clearAllData() {
-  console.log("testing!");
+  list.innerHTML = "";
   localStorage.removeItem("todoList");
 }
 
-function getListFromStorage() {}
+// user wants to retrieve list items when document has loaded
+function getListFromStorage() {
+  const json = localStorage.getItem("todoList");
+  if (json) {
+    const toArr = json.split(",");
+    toArr.forEach((i) => {
+      renderListItems(i);
+    });
+  }
+}
 
+getListFromStorage();
 clearDataBtn.addEventListener("click", clearAllData);
