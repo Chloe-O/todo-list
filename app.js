@@ -2,24 +2,24 @@ const listInput = document.getElementById("listInput");
 const submitListItemBtn = document.getElementById("listSubmit");
 const list = document.getElementById("list");
 
-let listArr = ['do the laundry', 'buy chicken', 'feed the cat', 'send letter'];
+let listArr = [];
 
-function displayListItems(arr) {
-    arr.forEach(item => {
-        // console.log(`<li class="list-item">${item}</li>`);
-        document.createElement('li');
-    });
+function renderListItems(x) {
+  let NewItemHTML = document.createElement("li");
+  NewItemHTML.classList = "list-item";
+  NewItemHTML.innerText = x;
+  list.appendChild(NewItemHTML);
+  console.log(NewItemHTML);
+  console.log(listArr);
 }
-
-displayListItems(listArr);
 
 submitListItemBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (listInput.value) {
-    listArr.push(listInput.value);
+    let newItem = listInput.value;
+    listArr.push(newItem);
+    renderListItems(newItem);
+
     listInput.value = "";
-    console.log(listArr);
   }
 });
-
-console.log(listArr);
