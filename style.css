@@ -43,10 +43,16 @@ body {
   align-items: center;
 }
 .to-do-list-container form .input {
+  border: 1px solid #171515;
+  padding: 0.25em 0.5em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
   background: #fff;
 }
 .to-do-list-container .clear-btn {
   margin: 0 auto;
+  display: block;
 }
 .to-do-list-container h1 {
   text-align: center;
