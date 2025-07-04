@@ -10,12 +10,24 @@
     <div class="to-do-list-container">
       <h1>To do list</h1>
       <form action="">
-        <input type="text" id="listInput" class="input">
-        <input type="submit" value="Add" id="listSubmit" class="btn">
+        <input type="text" id="listInput" class="input" />
+        <input type="submit" value="Add" id="listSubmit" class="btn" />
       </form>
-      <ul id="list">
-      </ul>
+      <ul id="list"></ul>
       <button class="btn clear-btn" id="clearData">Clear all data</button>
+    </div>
+
+    <div id="confirmDataClearModal">
+      <div class="modal-inner">
+        <p>
+          Are you sure you want to delete your data? This action cannot be
+          undone
+        </p>
+        <div id="btn-wrap">
+          <button class="btn" value="delete">Yes, delete my data</button>
+          <button class="btn" value="keep">No thanks, go back</button>
+        </div>
+      </div>
     </div>
     <script src="/app.js"></script>
   </body>
