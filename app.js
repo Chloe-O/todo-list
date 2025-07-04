@@ -21,7 +21,7 @@ function renderListItems(x) {
 
 submitListItemBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  if (listInput.value) {
+  if (listInput.value && !listInput.value == " ") {
     let newItem = listInput.value;
     listArr.push(newItem);
     saveListToLocalStorage(listArr);
