@@ -4,7 +4,7 @@ const list = document.getElementById("list");
 const clearDataBtn = document.getElementById("clearData");
 
 const modal = document.getElementById("confirmDataClearModal");
-const modalBtnsContainer = document.getElementById("#btn-wrap");
+const modalBtnsContainer = document.getElementById("btnWrap");
 const deleteDataBtn = document.getElementById("deleteData");
 const keepDataBtn = document.getElementById("keepData");
 
@@ -46,12 +46,16 @@ submitListItemBtn.addEventListener("click", (e) => {
 // user wants to clear all list items
 function clearAllData() {
   modal.style.display = "flex";
-  modalBtnsContainer.addEventListener("click", (e) => {
-    if ((e.target.value = "delete")) {
-      // list.innerHTML = "";
-      // localStorage.removeItem("todoList");
-      console.log(e.target.value);
-
+  modal.addEventListener("click", (e) => {
+    let btnClick = e.target;
+    if (btnClick.value == "delete") {
+      localStorage.clear("todoList");
+      list.innerHTML = "";
+      modal.style.display = 'none';
+    } else if (btnClick.value == "keep") {
+      modal.style.display = "none";
+    } else if (btnClick.classList.contains("modal")) {
+      modal.style.display = "none";
     }
   });
 }
