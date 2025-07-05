@@ -20,17 +20,28 @@ const stringifiedArr = JSON.stringify(listArr);
 - add individual delete item button for each list item
 */
 
-// users add new items to list
-function sumbitListItem(e) {
-  e.preventDefault();
-  if (listInput.value && !listInput.value == " ") {
-    let newItem = listInput.value;
-    listArr.push(newItem);
-    renderListItems(newItem);
-    listInput.value = "";
+// user data stored
+function saveListToLocalStorage(arr) {
+  localStorage.setItem("todoList", arr);
+}
+
+// user wants to retrieve list items when document has loaded
+function getListFromStorage() {
+  const toString = JSON.stringify(localStorage.getItem("todoList"));
+  const todos = JSON.parse(toString);
+
+  console.log(todos);
+
+  if (todos) {
+    const toArr = todos.split(",");
+    toArr.forEach((i) => {
+      listArr.push(i);
+      renderListItems(i);
+    });
   }
-  saveListToLocalStorage(listArr);
-};
+}
+
+getListFromStorage();
 
 // users add item by click or enter
 submitListItemBtn.addEventListener("click", (e) => sumbitListItem(e));
@@ -40,9 +51,17 @@ listInput.addEventListener("keydown", (e) => {
   }
 });
 
-// user data stored
-function saveListToLocalStorage(arr) {
-  localStorage.setItem("todoList", arr);
+// users add new items to list
+function sumbitListItem(e) {
+  e.preventDefault();
+  if (listInput.value) {
+    let newItem = listInput.value;
+    listArr.push(newItem);
+    saveListToLocalStorage(listArr);
+    renderListItems(newItem);
+    listInput.value = "";
+    console.log(listArr);
+  }
 }
 
 // items are rendered in the DOM
@@ -60,6 +79,7 @@ function clearAllData() {
     let btnClick = e.target;
     if (btnClick.value == "delete") {
       localStorage.clear("todoList");
+      listArr = [];
       list.innerHTML = "";
       modal.style.display = "none";
     } else if (btnClick.value == "keep") {
@@ -70,20 +90,8 @@ function clearAllData() {
   });
 }
 
-// user wants to retrieve list items when document has loaded
-function getListFromStorage() {
-  const json = localStorage.getItem("todoList");
-  if (json) {
-    const toArr = json.split(",");
-    toArr.forEach((i) => {
-      renderListItems(i);
-    });
-  }
-}
-
 // function deleteSingleItem() {
-//   list.addEventListener()
+//   list.addEventListener("click", (e) => {});
 // }
 
-getListFromStorage();
 clearDataBtn.addEventListener("click", clearAllData);
