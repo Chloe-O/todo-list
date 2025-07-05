@@ -15,16 +15,17 @@ const stringifiedArr = JSON.stringify(listArr);
 // To implement
 
 /*
-- add modal to confirm user wants to delete data
+- add modal to confirm user wants to delete data [ ✓ ]
 - click on list item adds strike through and adds 'complete' (class or data-val?)
 - add individual delete item button for each list item
 */
 
+// user data stored
 function saveListToLocalStorage(arr) {
   localStorage.setItem("todoList", arr);
-  console.log(arr);
 }
 
+// items are rendered in the DOM
 function renderListItems(x) {
   let NewItemHTML = document.createElement("li");
   NewItemHTML.classList = "list-item";
@@ -32,7 +33,16 @@ function renderListItems(x) {
   list.appendChild(NewItemHTML);
 }
 
-submitListItemBtn.addEventListener("click", (e) => {
+// users add item by click or enter
+submitListItemBtn.addEventListener("click", (e) => sumbitListItem(e));
+listInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    sumbitListItem(e);
+  }
+});
+
+// users add new items to list
+function sumbitListItem(e) {
   e.preventDefault();
   if (listInput.value && !listInput.value == " ") {
     let newItem = listInput.value;
@@ -41,7 +51,7 @@ submitListItemBtn.addEventListener("click", (e) => {
     renderListItems(newItem);
     listInput.value = "";
   }
-});
+}
 
 // user wants to clear all list items
 function clearAllData() {
@@ -51,7 +61,7 @@ function clearAllData() {
     if (btnClick.value == "delete") {
       localStorage.clear("todoList");
       list.innerHTML = "";
-      modal.style.display = 'none';
+      modal.style.display = "none";
     } else if (btnClick.value == "keep") {
       modal.style.display = "none";
     } else if (btnClick.classList.contains("modal")) {
