@@ -20,6 +20,26 @@ const stringifiedArr = JSON.stringify(listArr);
 - add individual delete item button for each list item
 */
 
+// users add new items to list
+function sumbitListItem(e) {
+  e.preventDefault();
+  if (listInput.value && !listInput.value == " ") {
+    let newItem = listInput.value;
+    listArr.push(newItem);
+    renderListItems(newItem);
+    listInput.value = "";
+  }
+  saveListToLocalStorage(listArr);
+};
+
+// users add item by click or enter
+submitListItemBtn.addEventListener("click", (e) => sumbitListItem(e));
+listInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    sumbitListItem(e);
+  }
+});
+
 // user data stored
 function saveListToLocalStorage(arr) {
   localStorage.setItem("todoList", arr);
@@ -31,26 +51,6 @@ function renderListItems(x) {
   NewItemHTML.classList = "list-item";
   NewItemHTML.innerText = x;
   list.appendChild(NewItemHTML);
-}
-
-// users add item by click or enter
-submitListItemBtn.addEventListener("click", (e) => sumbitListItem(e));
-listInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    sumbitListItem(e);
-  }
-});
-
-// users add new items to list
-function sumbitListItem(e) {
-  e.preventDefault();
-  if (listInput.value && !listInput.value == " ") {
-    let newItem = listInput.value;
-    listArr.push(newItem);
-    saveListToLocalStorage(listArr);
-    renderListItems(newItem);
-    listInput.value = "";
-  }
 }
 
 // user wants to clear all list items
@@ -80,6 +80,10 @@ function getListFromStorage() {
     });
   }
 }
+
+// function deleteSingleItem() {
+//   list.addEventListener()
+// }
 
 getListFromStorage();
 clearDataBtn.addEventListener("click", clearAllData);
